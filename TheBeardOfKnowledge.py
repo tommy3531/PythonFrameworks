@@ -7,18 +7,18 @@ from Controller.Propublica import get_specific_member
 app = Flask(__name__)
 
 
-@app.route('/twitter')
-def twitter():
-    timeline = get_all_tweets_from_user_timeline("lutherstrange")
+@app.route('/twitter/timeline/<senator_twitter_name>')
+def twitter(senator_twitter_name):
+    name = "lutherstrange"
+    timeline = get_all_tweets_from_user_timeline(senator_twitter_name)
     return jsonify(timeline)
 
 
-@app.route('/legislator')
-def legislator():
+@app.route('/legislator/<legislator_id>')
+def legislator(legislator_id):
     leg_id = "S001202"
-    a = get_specific_member(leg_id)
-    print(a)
-    return jsonify(a)
+    legislator_data = get_specific_member(legislator_id)
+    return jsonify(legislator_data)
 
 
 if __name__ == '__main__':
